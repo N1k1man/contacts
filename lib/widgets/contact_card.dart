@@ -22,11 +22,12 @@ class ContactCard extends StatelessWidget {
     final theme = Theme.of(context);
     final bodyLargeStyle = theme.textTheme.bodyLarge!;
 
-    bool isBirthday = contact.dateOfBirth.year == DateTime.now().year &&
-        contact.dateOfBirth.month == DateTime.now().month &&
-        contact.dateOfBirth.day == DateTime.now().day;
+    bool isBirthday = contact.dateOfBirth != null &&
+        contact.dateOfBirth!.year == DateTime.now().year &&
+        contact.dateOfBirth!.month == DateTime.now().month &&
+        contact.dateOfBirth!.day == DateTime.now().day;
 
-    bool isEmptySurname = contact.surname != '';
+    bool isEmptySurname = contact.surname.isNotEmpty;
 
     return GestureDetector(
       onTap: () {

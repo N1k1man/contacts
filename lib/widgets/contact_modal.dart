@@ -7,6 +7,10 @@ class ContactModal extends StatelessWidget {
 
   const ContactModal({super.key, required this.contact});
 
+  String _getFieldValue(String? value) {
+    return value?.isNotEmpty == true ? value! : 'Не указана';
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -23,27 +27,27 @@ class ContactModal extends StatelessWidget {
           ),
           SizedBox(height: 8),
           Text(
-            'Имя: ${contact.name}',
+            'Имя: ${_getFieldValue(contact.name)}',
             style: theme.textTheme.bodySmall,
           ),
           SizedBox(height: 8),
           Text(
-            'Фамилия: ${contact.surname}',
+            'Фамилия: ${_getFieldValue(contact.surname)}',
             style: theme.textTheme.bodySmall,
           ),
           SizedBox(height: 8),
           Text(
-            'Телефон: ${contact.phone}',
+            'Телефон: ${_getFieldValue(contact.phone)}',
             style: theme.textTheme.bodySmall,
           ),
           SizedBox(height: 8),
           Text(
-            'Почта: ${contact.email}',
+            'Почта: ${_getFieldValue(contact.email)}',
             style: theme.textTheme.bodySmall,
           ),
           SizedBox(height: 8),
           Text(
-            'Дата рождения: ${formatDate(contact.dateOfBirth)}',
+            'Дата рождения: ${contact.dateOfBirth != null ? formatDate(contact.dateOfBirth!) : 'Не указана'}',
             style: theme.textTheme.bodySmall,
           ),
         ],

@@ -28,33 +28,30 @@ class _NewContactState extends State<NewContact> {
   }
 
   void onSaved() {
-    if (name != '' && selectedDate != null) {
-      final dateTime = DateTime(
-        selectedDate!.year,
-        selectedDate!.month,
-        selectedDate!.day,
-      );
-      final newContact = Contact(
-        id: randomId,
-        name: name,
-        surname: surname,
-        phone: phone,
-        email: mail,
-        dateOfBirth: dateTime,
-      );
-      widget.onContactCreated(newContact);
-      Navigator.pop(context);
-    } else {
+    if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Пожалуйста, выберите дату рождения')),
+        SnackBar(content: Text('Имя обязательно для заполнения')),
       );
+      return;
     }
+
+    final newContact = Contact(
+      id: randomId,
+      name: name,
+      surname: surname,
+      phone: phone,
+      email: mail,
+      dateOfBirth: selectedDate,
+    );
+
+    widget.onContactCreated(newContact);
+    Navigator.pop(context);
   }
 
   void onDateTap() async {
     final now = DateTime.now();
-    final firstDate = DateTime(now.year - 1, now.month, now.day);
-    final lastDate = DateTime(now.year + 1, now.month, now.day);
+    final firstDate = DateTime(now.year - 100, now.month, now.day);
+    final lastDate = now;
 
     final dateFromUser = await showDatePicker(
       context: context,
@@ -98,51 +95,61 @@ class _NewContactState extends State<NewContact> {
           Row(
             children: [
               Expanded(
-                  child: TextField(
-                onChanged: (value) => setState(() => name = value),
-                decoration: InputDecoration(
-                  label: Text('Имя'),
+                child: TextField(
+                  onChanged: (value) => setState(() => name = value),
+                  decoration: InputDecoration(
+                    label: Text('Имя'),
+                  ),
                 ),
-              )),
+              ),
               SizedBox(width: 16),
               Expanded(
-                  child: TextField(
-                onChanged: (value) => setState(() => surname = value),
-                decoration: InputDecoration(
-                  label: Text('Фамилия'),
+                child: TextField(
+                  onChanged: (value) => setState(() => surname = value),
+                  decoration: InputDecoration(
+                    label: Text('Фамилия'),
+                  ),
                 ),
-              )),
+              ),
             ],
           ),
           Row(
             children: [
               Expanded(
-                  child: TextField(
-                onChanged: (value) => setState(() => phone = value),
-                decoration: InputDecoration(
-                  label: Text('Телефон'),
+                child: TextField(
+                  onChanged: (value) => setState(() => phone = value),
+                  decoration: InputDecoration(
+                    label: Text('Телефон'),
+                  ),
                 ),
-              )),
+              ),
               SizedBox(width: 16),
               Expanded(
-                  child: TextField(
-                onChanged: (value) => setState(() => mail = value),
-                decoration: InputDecoration(
-                  label: Text('Почта'),
+                child: TextField(
+                  onChanged: (value) => setState(() => mail = value),
+                  decoration: InputDecoration(
+                    label: Text('Почта'),
+                  ),
                 ),
-              )),
+              ),
             ],
           ),
           SizedBox(height: 16),
           Row(
             children: [
               Expanded(
-                  child:
-                      TextButton(onPressed: onCanceled, child: Text('Cancel'))),
+                child: TextButton(
+                  onPressed: onCanceled,
+                  child: Text('Cancel'),
+                ),
+              ),
               SizedBox(width: 16),
               Expanded(
-                  child:
-                      ElevatedButton(onPressed: onSaved, child: Text('Save'))),
+                child: ElevatedButton(
+                  onPressed: onSaved,
+                  child: Text('Save'),
+                ),
+              ),
             ],
           ),
         ],

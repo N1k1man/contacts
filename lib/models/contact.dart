@@ -4,7 +4,7 @@ class Contact {
   final String surname;
   final String phone;
   final String email;
-  final DateTime dateOfBirth;
+  final DateTime? dateOfBirth;
 
   Contact({
     required this.id,
@@ -12,6 +12,6 @@ class Contact {
     required this.surname,
     required this.phone,
     required this.email,
-    required this.dateOfBirth,
+    this.dateOfBirth,
   });
 }
