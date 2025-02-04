@@ -29,9 +29,6 @@ class _NewContactState extends State<NewContact> {
 
   void onSaved() {
     if (name.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Имя обязательно для заполнения')),
-      );
       return;
     }
 
