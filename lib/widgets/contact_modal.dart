@@ -18,6 +18,11 @@ class ContactModal extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
+            'id: ${contact.id}',
+            style: theme.textTheme.bodySmall,
+          ),
+          SizedBox(height: 8),
+          Text(
             'Имя: ${contact.name}',
             style: theme.textTheme.bodySmall,
           ),

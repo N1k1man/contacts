@@ -26,6 +26,8 @@ class ContactCard extends StatelessWidget {
         contact.dateOfBirth.month == DateTime.now().month &&
         contact.dateOfBirth.day == DateTime.now().day;
 
+    bool isEmptySurname = contact.surname != '';
+
     return GestureDetector(
       onTap: () {
         _showContactDetails(context);
@@ -46,13 +48,14 @@ class ContactCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 10),
-                    Text(
-                      contact.surname,
-                      style: bodyLargeStyle.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                    if (isEmptySurname)
+                      Text(
+                        contact.surname,
+                        style: bodyLargeStyle.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
