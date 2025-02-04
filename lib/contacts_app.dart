@@ -43,9 +43,16 @@ class _ContactsAppState extends State<ContactsApp> {
       dateOfBirth: DateTime.now(),
     ),
   ];
+
   void addContact(Contact newContact) {
     setState(() {
       contacts.add(newContact);
+    });
+  }
+
+  void deleteContact(Contact contact) {
+    setState(() {
+      contacts.remove(contact);
     });
   }
 
@@ -66,12 +73,13 @@ class _ContactsAppState extends State<ContactsApp> {
           IconButton(onPressed: openAddContactSheet, icon: Icon(Icons.add)),
         ],
         centerTitle: true,
-        title: Text(
-          'Контакты',
-        ),
+        title: Text('Контакты'),
       ),
       body: SingleChildScrollView(
-        child: ContactsScreen(contacts: contacts),
+        child: ContactsScreen(
+          contacts: contacts,
+          onContactDeleted: deleteContact,
+        ),
       ),
     );
   }
